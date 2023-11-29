@@ -655,7 +655,7 @@ class CI_Javascript {
 		{
 			$str = $this->_open_script($external_file);
 		}
-		elseif (strpos($this->_javascript_location, 'http://') !== FALSE)
+		elseif ($this->_javascript_location && strpos($this->_javascript_location, 'http://') !== FALSE)
 		{
 			$str = $this->_open_script($this->_javascript_location.$external_file);
 		}

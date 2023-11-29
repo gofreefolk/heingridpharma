@@ -30,5 +30,5 @@
 });
      </script>
    </head>
-   <body onload="initialize()">
+   <body>
    	<br/><br/><br/>
