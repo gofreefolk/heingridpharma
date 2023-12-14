@@ -1,29 +1,20 @@
-<?php class Tourplan_model extends CI_Model
-{
-	function get_tourplan($data)
-	{
-	//	echo $data['month']."<br/>".$data['year']."<br/>".$data['staff_id'];
-       $sql = "SELECT tour_date, place, (select name from place where place.id=tourplan.place) as place_name,
-       			 station, hotel_lodge, staff_id, day, tourplan_id from tourplan where  month(tour_date)=? and 
-       			 	year(tour_date)=?  and staff_id=?  order by tour_date asc";		 
-		
-			$query=$this->db->query($sql, array($data['month'], $data['year'], $data['staff_id']));
-		if($query->num_rows==0)
-		{
+<?php class Tourplan_model extends CI_Model {
+	function get_tourplan($data) {
+		$sql = "SELECT tour_date, place, (select name from place where place.id=tourplan.place) as place_name,
+		station, hotel_lodge, staff_id, day, tourplan_id from tourplan where  month(tour_date)=? and
+		year(tour_date)=?  and staff_id=?  order by tour_date asc";
+		$query=$this->db->query($sql, array($data['month'], $data['year'], $data['staff_id']));
+		if( $query->num_rows() == 0) {
 			$this->create_tour($data);
-			 $sql = "SELECT * from tourplan where  month(tour_date)=? and year(tour_date)=?
-			  and staff_id=?  order by tour_date asc";		 
+			$sql = "SELECT * from tourplan where  month(tour_date)=? and year(tour_date)=?
+					and staff_id=?  order by tour_date asc";
 		
 			$query=$this->db->query($sql, array($data['month'], $data['year'], $data['staff_id']));
-			return ($query->result());
+			return $query->result();
 		}
-		else
-		{
-			return ($query->result());
+		else {
+			return $query->result();
 		}
-		
-		
-		
 	}
 	function getbyid($tourplan_id)
 	{
