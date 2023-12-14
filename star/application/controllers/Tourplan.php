@@ -33,18 +33,16 @@ class Tourplan extends Pharmacy
 		
 		$this->load->view("includes/common_template.php", $data);
 	} 
-	function save_update()
-	{
+	function save_update() {
 		$filearr = explode(",",$_POST['place']);
 		$name = $filearr[0];
 		$data = array(
 				 'place'=>$name,
 				 'station'=>$_POST['station'],
 				 'hotel_lodge'=>$_POST['phone']
-				 
 				);
 		$this->load->model('tourplan_model');
-		$val = $this->tourplan_model->update_tour($data, $_POST['tourplan_id']);
+		$this->tourplan_model->update_tour($data, $_POST['tourplan_id']);
 		$this->create_or_view_tourplan(1);
 	}
 	 function getstation()
@@ -73,34 +71,24 @@ class Tourplan extends Pharmacy
 			 echo json_encode($detail);	
 	 }
 	 
-	function create_or_view_tourplan($d="")
-	{
-			if($d=="")
-			{	
+	function create_or_view_tourplan( $d = "" )	{
+			if( $d == "") {
 			$d = explode("/",$_POST['date']); 
-		
 			$date = array("tour_date"=>$_POST['date']);
 			$this->session->set_userdata($date);
-			}
-			else
-			 {
+			} else {
 				$d = explode("/",$this->session->userdata('tour_date'));
 			}
 		$data =array('month'=>$d[0], 'year'=>$d[1], 'staff_id'=>$this->session->userdata('id'));
-		
 		$this->load->model("tourplan_model");
 		$data['report']=$this->tourplan_model->get_tourplan($data);
-		
 		$this->load->model('staff_model');
 		$data['hq'] = $this->staff_model->get_hq($data['staff_id']);
-		
-		foreach($data['hq'] as $row)
-		{
+		foreach($data['hq'] as $row) {
 			$desi = $row->designation_id;
 		}
 		$this->load->model('designation');
 		$data['desi'] = $this->designation->get_selected_designation($desi);
-		
 		$data['title']="Toue plan";
 		$data['menu'] = 'menu/staff_menu';
 		$data['main_content'] = "tour_plan/view_tourplan";
