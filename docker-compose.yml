@@ -1,0 +1,43 @@
+version: '3'
+services:
+  heingridpharma:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80" # Map host port 80 to container port 80
+    volumes:
+      #- /home/ec2-user/servicecube/servicecube:/var/www/html/servicecube # Map app directory to container web root
+      - C:/laragon/www/gofreefolk/heingridpharma:/var/www/html/ 
+
+  # mysql:
+  #   build:
+  #     context: .
+  #     dockerfile: ./mysql/Dockerfile
+  #   ports:
+  #     - "3306:3306"
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  #     MYSQL_USER: ${MYSQL_USER}
+  #     MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  #     MYSQL_DATABASE: ${MYSQL_DATABASE}
+  #   volumes:
+  #     #- /home/ec2-user/servicecube/mysql/mysql_data:/var/lib/mysql
+  #     - C:/laragon/www/tieche/servicecube-docker/mysql/mysql_data:/var/lib/mysql 
+
+  # phpmyadmin:
+  #   build:
+  #     context: .
+  #     dockerfile: ./phpmyadmin/Dockerfile
+  #   container_name: phpmyadmin
+  #   ports:
+  #     - 8080:80
+
+# volumes:
+#   mysql_data:
+
+
+#sudo docker-compose up -d
+#sudo docker-compose build servicecube && sudo docker-compose up -d servicecube
+#sudo docker-compose build mysql && sudo docker-compose up -d mysql
+#sudo docker-compose build phpmyadmin && sudo docker-compose up -d phpmyadmin
