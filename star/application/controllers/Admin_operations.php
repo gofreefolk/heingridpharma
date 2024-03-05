@@ -56,10 +56,9 @@ class Admin_operations extends Pharmacy
 		$data = array('name'=>$this->input->post('name'),
 					  'district'=>$this->input->post('district'),
 					  
-					   'hq'=>$this->input->post('hq')
+					   'hq'=>$this->input->post('hq') ? $this->input->post('hq') : 0,
 					
 					 );
-					
 		$this->load->model('place_model');
 		$val=$this->place_model->insert_place($data);
 		
