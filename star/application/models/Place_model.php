@@ -51,11 +51,6 @@
 	{
 		 
 		$val = $this->db->insert('place', $data);
-		if($this->db->_error_number()==1062)
-		{
-			return 1062;
-			
-		}
 		return $val;
 	}
 	function get_hq()
